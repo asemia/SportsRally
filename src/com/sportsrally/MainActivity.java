@@ -53,6 +53,7 @@ public class MainActivity extends Activity implements LocationListener {
 	static String bestProvider = "";
 	static final int MIN_TIME = 1000;
 	static final float MIN_DIST = 1;
+	int  gg;
 	static LocationManager mgr = null;
 	static Location myLocation;
 	Marker marker;

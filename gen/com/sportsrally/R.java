@@ -409,10 +409,10 @@ containing a value of this type.
     public static final class id {
         public static final int LinearLayout1=0x7f060014;
         public static final int LinearLayout2=0x7f060023;
-        public static final int action_settings=0x7f060024;
+        public static final int action_settings=0x7f060025;
         public static final int book_now=0x7f060010;
         public static final int btnEnd=0x7f060022;
-        public static final int btn_back=0x7f060015;
+        public static final int btnMusic=0x7f060015;
         public static final int btn_deleteLatLngTable=0x7f060016;
         public static final int button3=0x7f060017;
         public static final int buttonToggle=0x7f060021;
@@ -420,6 +420,7 @@ containing a value of this type.
         public static final int buy_now=0x7f06000f;
         public static final int buy_with_google=0x7f06000e;
         public static final int classic=0x7f060011;
+        public static final int etxRecordName=0x7f060024;
         public static final int grayscale=0x7f060012;
         public static final int holo_dark=0x7f060005;
         public static final int holo_light=0x7f060006;
@@ -451,6 +452,7 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_map_for_pause=0x7f030001;
+        public static final int alert_save_view=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

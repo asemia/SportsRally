@@ -32,7 +32,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btnMusic"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

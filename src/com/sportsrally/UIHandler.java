@@ -74,8 +74,8 @@ public class UIHandler extends Handler {
 	  	if(myapp.nowPoint != null)
 	  		
 	  	{  
-	  	  rowId = dbHelper.insertLatLng(myapp.nowPoint.latitude, myapp.nowPoint.longitude);
-	  	 
+//	  	  rowId = dbHelper.insertLatLng(myapp.nowPoint.latitude, myapp.nowPoint.longitude);
+	  	 rowId = dbHelper.insertLatLng(myapp.nowPoint.latitude, myapp.nowPoint.longitude,myapp.activeTableName);
 	  	 Cursor cursor =dbHelper.queryLatLngCursor();
 	  	 cursor.moveToLast();
 	  	 String Lat = Double.toString(cursor.getDouble(1));

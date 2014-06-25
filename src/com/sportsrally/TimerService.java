@@ -22,6 +22,7 @@ public class TimerService extends Service {
 	public static final String ACTION_STOP = "com.sportsrally.action.STOP";
 	Context context = this;
 
+
 	enum State {
 		Stopped, Running
 	};
@@ -116,9 +117,9 @@ public class TimerService extends Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 				final MyValues myapp = (MyValues) context
 						.getApplicationContext();
+				
 				long time = (myapp.spentSeconds + (System.currentTimeMillis() - myapp.startTime)) / 1000;
 
 				String s = String.format("%d", time);
@@ -130,9 +131,9 @@ public class TimerService extends Service {
 				Log.v("TEST", "still runing");
 			}
 
-			{
-				final MyValues myapp = (MyValues) context
-						.getApplicationContext();
+			{	final MyValues myapp = (MyValues) context
+					.getApplicationContext();
+				
 				myapp.endTime = System.currentTimeMillis();
 				myapp.spentSeconds = myapp.spentSeconds + myapp.endTime
 						- myapp.startTime;

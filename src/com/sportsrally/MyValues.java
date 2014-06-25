@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import android.R.integer;
 import android.app.Application;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,6 +23,8 @@ public class MyValues extends Application {
 	static ArrayList<Double> myLon;
 	static ArrayList<Double> myLat;
 	static Location nowLocation;
+	static String activeTableName=null;
+	static int progress;
 	
 static {idleCounter =0;isMoving=false;}
 

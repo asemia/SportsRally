@@ -21,74 +21,85 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MapForPause extends Activity {
-	
-	Button btn_back,btn_deleteLatLngTable;
+
+	Button btn_back, btn_deleteLatLngTable;
 	Context context = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_for_pause);
-		
+		new doAsyncTask(context).execute();
 		btn_back = (Button) findViewById(R.id.btnMusic);
 		btn_deleteLatLngTable = (Button) findViewById(R.id.btn_deleteLatLngTable);
 		final MyValues myapp = (MyValues) context.getApplicationContext();
-		
+
 		ArrayList<LatLng> list = null;
 		DBhelper dBhelper = new DBhelper(this);
-		myapp.progress =0;
-		new doAsyncTask(this).execute();
+		myapp.progress = 0;
+	
+
 		list = dBhelper.getAllFromLatLngTable(myapp.activeTableName);
 		GoogleMap gmap;
 		gmap = ((MapFragment) getFragmentManager().findFragmentById(
 				R.id.pauseMap)).getMap();
 		int i = 0;
-		
-		if(list!=null){
-			
-		
-		if(list.size()>1){
-			int p = list.size();
-			int progress = 0;
-			Toast.makeText(getApplicationContext(), Integer.toString(p)+myapp.activeTableName, Toast.LENGTH_LONG).show();
-			for(int x=1;x<list.size();x++){
-				progress = (int)((x*100.0)/p) ;
-				myapp.progress = progress;
-		Polyline line = gmap.addPolyline(new PolylineOptions()
-	     .add(list.get(x-1), list.get(x))
-	     .width(5)
-	     .color(Color.RED));
-		gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 17));
+
+		if (list != null) {
+
+			if (list.size() > 1) {
+				int p = list.size();
+				int progress = 0;
+				Toast.makeText(getApplicationContext(),
+						Integer.toString(p) + myapp.activeTableName,
+						Toast.LENGTH_LONG).show();
+				for (int x = 1; x < list.size(); x++) {
+					progress = (int) ((x * 100.0) / p);
+					myapp.progress = progress;
+					Polyline line = gmap.addPolyline(new PolylineOptions()
+							.add(list.get(x - 1), list.get(x)).width(5)
+							.color(Color.RED));
+					gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+							list.get(0), 17));
+				}
 			}
+			myapp.progress = 101;
+
 		}
-		myapp.progress=101;
-		
-		}
-		
-		btn_back.setOnClickListener(new Button.OnClickListener(){
+
+		btn_back.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO 自動產生的方法 Stub
 				finish();
 			}
-			
+
 		});
-		
-		btn_deleteLatLngTable.setOnClickListener(new Button.OnClickListener(){
+
+		btn_deleteLatLngTable.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO 自動產生的方法 Stub
 				DBhelper dBhelper = new DBhelper(MapForPause.this);
 				dBhelper.deleteLatLngTable(myapp.activeTableName);
+				myapp.activeTableName = dBhelper.getNewTableName();
+				dBhelper.createTable(myapp.activeTableName);
+
+				myapp.spentSeconds = 0;
+				myapp.distance = 0;
+				myapp.idleCounter = 0;
+				myapp.nowLocation = null;
+				myapp.nowPoint = null;
+				myapp.lastPoint = null;
+				myapp.tmpPoint = null;
+				myapp.isMoving = false;
 				finish();
 			}
-			
+
 		});
-		
-		
-		
+
 	}
 
 	@Override
@@ -101,6 +112,5 @@ public class MapForPause extends Activity {
 	void showToast(String s) {
 		Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
 	}
-	
-	
+
 }

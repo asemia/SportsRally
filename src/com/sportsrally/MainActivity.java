@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements LocationListener {
 	boolean isGpsEnabled;
 	boolean isNetworkEnable;
 	boolean isInternetEnable;
+	long lastUpdateTime;
 	static String bestProvider = "";
 	static final int MIN_TIME = 1000;
 	static final float MIN_DIST = 1;
@@ -318,19 +319,27 @@ public class MainActivity extends Activity implements LocationListener {
 		myapp.isMoving = true;
 		myDialog.dismiss();
 		myapp.lastPoint = myapp.nowPoint;
+		myapp.lastLocation = myapp.nowLocation;
 		myapp.nowPoint = new LatLng(location.getLatitude(),
 				location.getLongitude());
 		myapp.nowLocation = location;
 		zoom = 17;
-		txtSpeed.setText(String.format("%f", location.getSpeed()));
+		float speed = location.getSpeed();
+		txtSpeed.setText(String.format("%f", speed));
+		int movingIcon=0;
+		if (speed==0) movingIcon=R.drawable.man;
+		if (speed>0&&speed<=2.5) movingIcon = R.drawable.turtle;
+		if (speed>2.5&&speed<=5) movingIcon=R.drawable.rabbit;
+		if(speed>5) movingIcon = R.drawable.eagle;
+		if(speed>10) movingIcon = R.drawable.superman;
 		gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(myapp.nowPoint,
 				zoom));
 		if (marker != null)
 			marker.remove();
 		marker = gmap.addMarker(new MarkerOptions().position(myapp.nowPoint)
-				.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon)));
+				.icon(BitmapDescriptorFactory.fromResource(movingIcon)));
 
-		if (TimerService.mState.equals(TimerService.State.Running)
+		if (location.getProvider().equals("gps")
 				&& myapp.lastPoint != null && myapp.nowPoint != null) {
 			myapp.distance += GetDistance(myapp.lastPoint, myapp.nowPoint);
 			txtTotalDistance.setText(String.format("%f", myapp.distance));

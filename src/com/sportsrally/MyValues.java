@@ -14,6 +14,7 @@ public class MyValues extends Application {
 	
 	static long spentSeconds;
 	static long startTime;
+	static int color;
 	static long endTime;
 	static int idleCounter;
 	static double lon,lat;
@@ -22,7 +23,7 @@ public class MyValues extends Application {
 	static LatLng lastPoint,nowPoint,tmpPoint;
 	static ArrayList<Double> myLon;
 	static ArrayList<Double> myLat;
-	static Location nowLocation;
+	static Location nowLocation,lastLocation,tmpLocation;
 	static String activeTableName=null;
 	static int progress;
 	

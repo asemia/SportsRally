@@ -5,5 +5,28 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_map_for_pause">MapForPause</string>
+    
+       <string name="app_name">SportsRally</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="st1">Tracker</string>
+    <string name="st2">Compete</string>
+    <string name="st3">Config</string>
+    <string name="st4">Histroy</string>
+    <string name="st5">EXIT</string>
+	<string name="bt01">RESET</string>
+	<string name="bt02">DONE</string>
+	<string name="rd01">15sec</string>
+	<string name="rd02">30sec</string>
+	<string name="rd03">60sec</string>
+	<string name="rd04">3min</string>
+	<string name="rd05">5min</string>
+	<string name="rd06">10min</string>
+	<string name="st21">Remind Period:</string>
+	<string name="st22">Call/sec</string>
+	<string name="st23">Target Speed</string>
+	<string name="st24">Good to begin well, better to end well.</string>
+	<string name="st25">FAST range</string>
+	<string name="stkm">kms/hr</string>
 
 </resources>

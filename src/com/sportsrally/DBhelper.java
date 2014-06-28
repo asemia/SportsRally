@@ -146,6 +146,7 @@ public class DBhelper extends SQLiteOpenHelper {
 	public long insertIndexTable(String tablename) {
 		// db.execSQL("DROP TABLE IF EXISTS indexTable");
 		SQLiteDatabase db = getWritableDatabase();
+		
 		String INDEX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
 				+ INDEX_TABLE_NAME + " ("
 				+ "_ID INTEGER PRIMARY KEY AUTOINCREMENT, "

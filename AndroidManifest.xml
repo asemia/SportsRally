@@ -27,7 +27,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.sportsrally.MainActivity"
+            android:name="com.sportsrally.Tittle"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -36,6 +36,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.sportsrally.Menu"/>
+        <activity
+            android:name="com.sportsrally.compete"/>
+         <activity
+            android:name="com.sportsrally.Config"/>
+         <activity
+            android:name="com.sportsrally.MainActivity"/>
+         
 
         <service
             android:name="com.sportsrally.TimerService"

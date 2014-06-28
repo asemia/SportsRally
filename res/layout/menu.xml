@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main"
+    tools:context="com.sportsrally.Menu"
+    tools:ignore="MergeRootFrame" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/m01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.52"
+            android:background="@drawable/bt1"
+            android:text="@string/st1"
+            android:textColor="#E7AB6D"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/m02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.52"
+            android:background="@drawable/bt1"
+            android:text="@string/st2"
+            android:textColor="#E7AB6D"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/m03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.52"
+            android:background="@drawable/bt1"
+            android:text="@string/st3"
+            android:textColor="#E7AB6D"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/m04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.52"
+            android:background="@drawable/bt1"
+            android:text="@string/st4"
+            android:textColor="#E7AB6D"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/m05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.52"
+            android:background="@drawable/bt1"
+            android:text="@string/st5"
+            android:textColor="#E7AB6D"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

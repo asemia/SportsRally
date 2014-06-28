@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import android.R.color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -58,6 +59,7 @@ public class MainActivity extends Activity implements LocationListener {
 	boolean isGpsEnabled;
 	boolean isNetworkEnable;
 	boolean isInternetEnable;
+	long lastUpdateTime;
 	static String bestProvider = "";
 	static final int MIN_TIME = 1000;
 	static final float MIN_DIST = 1;
@@ -99,6 +101,7 @@ public class MainActivity extends Activity implements LocationListener {
 		myapp.nowPoint = null;
 		myapp.lastPoint = null;
 		myapp.tmpPoint = null;
+		myapp.tmpLocation = null;
 		myapp.isMoving = false;
 
 		if (myapp.activeTableName == null) {
@@ -298,71 +301,66 @@ public class MainActivity extends Activity implements LocationListener {
 	@Override
 	protected void onDestroy() {
 		// TODO 自動產生的方法 Stub
-		if (mgr != null) {
-			mgr.removeUpdates(this);
-		}
-		Intent intent = new Intent(MainActivity.this, TimerService.class);
-		android.os.Process.killProcess(android.os.Process.myPid());
-
-		stopService(intent);
+//		
+//		if (mgr != null) {
+//			mgr.removeUpdates(this);
+//		}
+//		Intent intent = new Intent(MainActivity.this, TimerService.class);
+//		stopService(intent);
+//		dbHelper.close();
+//		
 		
-		dbHelper.close();
+		
 		super.onDestroy();
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
 		// TODO 自動產生的方法 Stub
-		final MyValues myapp = (MyValues) this.getApplicationContext();
+		myDialog.dismiss();	
 		btnToggle.setVisibility(View.VISIBLE);
+		
+		final MyValues myapp = (MyValues) this.getApplicationContext();
 		myapp.isMoving = true;
-		myDialog.dismiss();
 		myapp.lastPoint = myapp.nowPoint;
+		myapp.lastLocation = myapp.nowLocation;
 		myapp.nowPoint = new LatLng(location.getLatitude(),
 				location.getLongitude());
 		myapp.nowLocation = location;
 		zoom = 17;
-		txtSpeed.setText(String.format("%f", location.getSpeed()));
+		float speed = location.getSpeed();
+		txtSpeed.setText(String.format("%f", speed));
+		int movingIcon=0;
+		if (speed==0) {movingIcon=R.drawable.man;MyValues.color=Color.BLACK;}
+		if (speed>0&&speed<=2.5) {movingIcon = R.drawable.turtle;MyValues.color=Color.BLACK;}
+		if (speed>2.5&&speed<=5) {movingIcon=R.drawable.rabbit;MyValues.color=Color.BLUE;}
+		if(speed>5) {movingIcon = R.drawable.eagle;MyValues.color=Color.RED;}
+		if(speed>10) {movingIcon = R.drawable.superman;MyValues.color=Color.MAGENTA;}
 		gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(myapp.nowPoint,
 				zoom));
-		if (marker != null)
-			marker.remove();
+		if (marker != null) marker.remove();
 		marker = gmap.addMarker(new MarkerOptions().position(myapp.nowPoint)
-				.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon)));
+				.icon(BitmapDescriptorFactory.fromResource(movingIcon)));
 
-		if (TimerService.mState.equals(TimerService.State.Running)
-				&& myapp.lastPoint != null && myapp.nowPoint != null) {
-			myapp.distance += GetDistance(myapp.lastPoint, myapp.nowPoint);
-			txtTotalDistance.setText(String.format("%f", myapp.distance));
-		}
 
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
 		// TODO 自動產生的方法 Stub
-		// Log.d("mytag","onProviderDisabled");
-		// getLocationProvider();
-		// mgr.requestLocationUpdates(MainActivity.bestProvider, MIN_TIME,
-		// MIN_DIST, this);
+
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
 		// TODO 自動產生的方法 Stub
-		// Log.d("mytag","onProviderEnabled");
-		// getLocationProvider();
-		// mgr.requestLocationUpdates(MainActivity.bestProvider, MIN_TIME,
-		// MIN_DIST, this);
+
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO 自動產生的方法 Stub
-		// Log.d("mytag","onStatusChanged");
-		// getLocationProvider();
-		// mgr.requestLocationUpdates(MainActivity.bestProvider, MIN_TIME,
-		// MIN_DIST, this);
+
 
 	}
 
@@ -448,7 +446,9 @@ public class MainActivity extends Activity implements LocationListener {
 				 Intent intent = new Intent(MainActivity.this,
 				 TimerService.class);
 				 stopService(intent);
-				 finish();
+				 Intent i = new Intent(MainActivity.this,com.sportsrally.Menu.class);
+					startActivity(i);
+			
 			}
 		});
 

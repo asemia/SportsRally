@@ -23,7 +23,12 @@ public class MyValues extends Application {
 	static LatLng lastPoint,nowPoint,tmpPoint;
 	static ArrayList<Double> myLon;
 	static ArrayList<Double> myLat;
+<<<<<<< HEAD
 	static Location nowLocation,lastLocation,tmpLocation;
+=======
+	static Location nowLocation;
+	static Location lastLocation;
+>>>>>>> e4e540d2b39c7d7cb1dfa036904977a088b4e5c9
 	static String activeTableName=null;
 	static int progress;
 	

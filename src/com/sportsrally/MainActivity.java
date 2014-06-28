@@ -331,17 +331,33 @@ public class MainActivity extends Activity implements LocationListener {
 		float speed = location.getSpeed();
 		txtSpeed.setText(String.format("%f", speed));
 		int movingIcon=0;
+<<<<<<< HEAD
 		if (speed==0) {movingIcon=R.drawable.man;MyValues.color=Color.BLACK;}
 		if (speed>0&&speed<=2.5) {movingIcon = R.drawable.turtle;MyValues.color=Color.BLACK;}
 		if (speed>2.5&&speed<=5) {movingIcon=R.drawable.rabbit;MyValues.color=Color.BLUE;}
 		if(speed>5) {movingIcon = R.drawable.eagle;MyValues.color=Color.RED;}
 		if(speed>10) {movingIcon = R.drawable.superman;MyValues.color=Color.MAGENTA;}
+=======
+		if (speed==0) movingIcon=R.drawable.man;
+		if (speed>0&&speed<=2.5) movingIcon = R.drawable.turtle;
+		if (speed>2.5&&speed<=5) movingIcon=R.drawable.rabbit;
+		if(speed>5) movingIcon = R.drawable.eagle;
+		if(speed>10) movingIcon = R.drawable.superman;
+>>>>>>> e4e540d2b39c7d7cb1dfa036904977a088b4e5c9
 		gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(myapp.nowPoint,
 				zoom));
 		if (marker != null) marker.remove();
 		marker = gmap.addMarker(new MarkerOptions().position(myapp.nowPoint)
 				.icon(BitmapDescriptorFactory.fromResource(movingIcon)));
 
+<<<<<<< HEAD
+=======
+		if (location.getProvider().equals("gps")
+				&& myapp.lastPoint != null && myapp.nowPoint != null) {
+			myapp.distance += GetDistance(myapp.lastPoint, myapp.nowPoint);
+			txtTotalDistance.setText(String.format("%f", myapp.distance));
+		}
+>>>>>>> e4e540d2b39c7d7cb1dfa036904977a088b4e5c9
 
 	}
 

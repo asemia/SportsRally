@@ -33,6 +33,7 @@ public class UIHandler extends Handler {
 		super.handleMessage(msg);
 		i = 0;
 		dbHelper = new DBhelper(this.mActivity);
+<<<<<<< HEAD
 		Location nowLocation,tmpLocation;
 		LatLng nowPoint,tmpPoint;
 
@@ -86,6 +87,65 @@ public class UIHandler extends Handler {
 		double avgspeed = myapp.distance
 				/ Double.parseDouble(msg.getData().getString("spentTime"));
 		this.mActivity.txtAvgSpeed.setText(String.format("%f", avgspeed));
+=======
+
+		final MyValues myapp = (MyValues) mActivity.getApplicationContext();
+		String s = msg.getData().getString("spentTime");
+
+		if (s != null) {
+			this.mActivity.txtSpentTime.setText(s);
+		}
+
+		if (this.mActivity.bestProvider != "gps") {
+			this.mActivity.bestProvider = this.mActivity.mgr.getBestProvider(
+					new Criteria(), true);
+		}
+
+		if (myapp.lastPoint != null && myapp.nowPoint != null) {
+
+			double avgspeed = myapp.distance
+					/ Double.parseDouble(msg.getData().getString("spentTime"));
+			this.mActivity.txtAvgSpeed.setText(String.format("%f", avgspeed));
+
+			if (myapp.tmpPoint == null)
+				myapp.tmpPoint = myapp.nowPoint;
+
+			if (myapp.tmpPoint != null && myapp.nowPoint != null) {
+
+				// if(this.mActivity.bestProvider=="gps"){
+
+				// if(myapp.nowLocation.getProvider().equals("gps")){
+				if (myapp.lastLocation.getProvider().equals("gps")
+						&& myapp.nowLocation.getProvider().equals("gps")) {
+					Polyline line = this.mActivity.gmap
+							.addPolyline(new PolylineOptions()
+									.add(myapp.tmpPoint, myapp.nowPoint)
+									.width(6).color(Color.BLUE));
+					myapp.tmpPoint = myapp.nowPoint;
+				}
+
+			} else {
+				myapp.idleCount(myapp.isMoving);
+			}
+		}
+
+		long rowId = 100;
+		if (myapp.nowPoint != null
+				&& myapp.nowLocation.getProvider().equals("gps"))
+
+		{
+
+			rowId = dbHelper.insertLatLng(myapp.nowPoint.latitude,
+					myapp.nowPoint.longitude, myapp.activeTableName);
+			Cursor cursor = dbHelper.queryLatLngCursor();
+			cursor.moveToLast();
+			String Lat = Double.toString(cursor.getDouble(1));
+			String Lng = Double.toString(cursor.getDouble(2));
+			String LatLng = Lat + " " + Lng;
+			int i = cursor.getCount();
+
+		}
+>>>>>>> e4e540d2b39c7d7cb1dfa036904977a088b4e5c9
 
 	}
 
